@@ -13,5 +13,6 @@ public class Main {
         SpringApplication app = new SpringApplication(Main.class);
         app.setDefaultProperties(Collections.singletonMap("server.port", "8082"));
         app.run(args);
+        System.out.println("Testing pipeline");
     }
 }
