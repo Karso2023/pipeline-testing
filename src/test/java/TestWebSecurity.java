@@ -7,6 +7,8 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrlPattern;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
@@ -24,12 +26,12 @@ public class TestWebSecurity {
                 .andExpect(view().name("login"));
     }
 
-    // @Test
-    // public void testHomeRedirect() throws Exception {
-    //     mockMvc.perform(get("/home"))
-    //             .andExpect(status().is3xxRedirection())
-    //             .andExpect(view().name("**/login"));
-    // }
+    @Test
+    public void testHomeRedirect() throws Exception {
+        mockMvc.perform(get("/home"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrlPattern("**/login"));
+    }
 
     @Test
     @WithMockUser(username = "user", roles = {"USER"})
